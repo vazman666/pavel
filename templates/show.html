@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Products</title>
+        <meta http-equiv="PRAGMA" content="NO-CACHE">
+        <link rel="icon" href="data:;base64,=">
+        
+    </head>
+    <body>
+        
+        <h2>Чекаут</h2>
+        <form method="POST" action="/pavel/del">
+            <button type="submit">Да,всё верно</button>
+          </form>
+        <form method="POST" action="/pavel">
+            <button type="submit">Нет,отмена</button>
+          </form>
+        <!--<p><a href="/Checkout">Посчитать</a></p>-->
+               
+        <table  border="1"  >
+            <thead><th>Id</th><th>Partnum</th><th>считаем</th><th>количество</th><th>Цена</th><th>Поставщик</th><th>Название</th><th>Примечание</th><th>Дата</th><th></th></thead>
+            {{range . }}
+            <tr bgcolor={{.Color}}>
+                <td>{{.Id}}</td>
+                
+                <td>{{.Partnum}}</td>
+                <td><form method="POST" action="/pavel/add/{{.Id}}">
+                    <button type="submit">on/off</button>
+                  </form>
+                </td>
+                <!--<td><a href="/add/{{.Id}}">Добавить</a>>-->
+                <td>{{.Qty}}</td>
+                <td>{{.Price}}</td>
+                <td>{{.Provider}}</td>
+                <td>{{.Name}}</td>
+                <td>{{.Remark}}</td>
+                <td>{{.Date}}</td>
+                
+            </tr>
+            {{end}}
+        </table>
+    </body>
+</html>

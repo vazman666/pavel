@@ -1,0 +1,22 @@
+{{template "base" .}}
+ 
+{{define "title"}}Создаём{{end}}
+ 
+{{define "main"}}
+        <h3>Add Product</h3>
+        <form method="POST">
+            <label>partnumber</label><br>
+            <input type="text" name="Partnum" /><br><br>
+            <label>количество</label><br>
+            <input type="number" name="Qty" /><br><br>
+            <label>цена</label><br>
+            <input type="text" name="Price" /><br><br>
+            <label>Поставщик</label><br>
+            <input type="text" name="Provider" /><br><br>
+            <label>Название детали</label><br>
+            <input type="text" name="Name" /><br><br>
+            <label>Примечание</label><br>
+            <input type="text" name="Remark" /><br><br>
+            <input type="submit" value="Send" />
+        </form>
+   {{end}}
