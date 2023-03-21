@@ -1,0 +1,8 @@
+[Unit]
+Description=My www server
+After=multi-user.target
+[Service]
+Type=idle
+ExecStart=/home/vazman/go/www/www.sh
+[Install]
+WantedBy=multi-user.target

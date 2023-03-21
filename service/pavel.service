@@ -1,0 +1,11 @@
+[Unit]
+Description=My www server
+After=multi-user.target
+[Service]
+User=vazman
+WorkingDirectory=/home/vazman/go/pavel
+Type=idle
+ExecStart=/home/vazman/go/pavel/www
+Restart=always
+[Install]
+WantedBy=multi-user.target
