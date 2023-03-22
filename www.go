@@ -16,9 +16,11 @@ func helloMuxGoHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("<head>	<meta http-equiv=\"refresh\" content=\"0; URL=http://www.japautozap.ru/\" /> </head> "))
 }
 
-/*func Pavel(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Func Pavel\n"))
-}*/
+/*
+	func Pavel(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Func Pavel\n"))
+	}
+*/
 func main() {
 	db, err := sql.Open("mysql", "vazman:rbhgbxb1@/mybase")
 
@@ -37,6 +39,7 @@ func main() {
 	r.HandleFunc("/pavel/create", pkg.CreateHandler)
 	r.HandleFunc("/pavel/Checkout", pkg.Checkout)
 	r.HandleFunc("/pavel/del", pkg.Del)
-	r.HandleFunc("/pavel/show",pkg.Show)
+	r.HandleFunc("/pavel/show", pkg.Show)
+	r.HandleFunc("/pavel/api/add", pkg.ApiAdd)
 	log.Fatal(http.ListenAndServe(":10011", r))
 }

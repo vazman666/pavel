@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"sync"
 )
+
 type Product struct {
 	Id       int     `json:"id"`
 	Partnum  string  `json:"partnum`
@@ -16,7 +17,6 @@ type Product struct {
 	Date     string  `json:"date"`
 	Color    string  `json:"color"`
 }
-
 
 var Database *sql.DB
 var M sync.Mutex
