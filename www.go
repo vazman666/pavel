@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"html/template"
 	"log"
 	"net/http"
 
@@ -13,7 +14,18 @@ import (
 )
 
 func helloMuxGoHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<head>	<meta http-equiv=\"refresh\" content=\"0; URL=http://www.japautozap.ru/\" /> </head> "))
+	tmpl, err := template.ParseFiles("templates/japautozap.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	// Dynamic data to inject into the HTML
+	data := map[string]string{
+		"Title":   "Welcome to Go Web!",
+		"Message": "Hello from the Go backend.",
+	}
+	tmpl.Execute(w, data)
+	//w.Write([]byte("<head>	<meta http-equiv=\"refresh\" content=\"0; URL=http://136.169.223.15/\" /> </head> "))
 }
 
 /*

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вся Япония - Оригинальные и неоригинальные запчасти на японские автомобили</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        header { background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        nav { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #c41e3a; }
+        .logo span { color: #333; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #c41e3a; }
+        .hero { margin-top: 70px; height: 600px; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1200') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+        .hero-content h1 { font-size: 3rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; }
+        .hero-content p { font-size: 1.3rem; margin-bottom: 2rem; }
+        .btn { display: inline-block; padding: 1rem 2.5rem; background: #c41e3a; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; text-transform: uppercase; transition: all 0.3s; border: none; cursor: pointer; font-size: 1rem; }
+        .btn:hover { background: #a01830; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(196, 30, 58, 0.4); }
+        .btn:disabled { background: #999; cursor: not-allowed; transform: none; }
+        .features { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #333; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .feature-card { text-align: center; padding: 2rem; border-radius: 10px; transition: transform 0.3s; }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .feature-card h3 { margin-bottom: 1rem; color: #c41e3a; }
+        .categories { background: #f5f5f5; padding: 5rem 2rem; }
+        .categories-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .category-card { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s; }
+        .category-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .category-card h3 { color: #c41e3a; margin-bottom: 1rem; }
+        .category-card ul { list-style: none; padding-left: 0; }
+        .category-card li { padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+        .category-card li:last-child { border-bottom: none; }
+        .why-us { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .why-item { display: flex; gap: 1rem; align-items: flex-start; }
+        .why-number { font-size: 2rem; font-weight: bold; color: #c41e3a; min-width: 50px; }
+        .why-item h3 { margin-bottom: 0.5rem; }
+        .contact { background: #222; color: white; padding: 5rem 2rem; }
+        .contact-container { max-width: 600px; margin: 0 auto; }
+        .contact .section-title { color: white; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem; border: 2px solid transparent; border-radius: 5px; font-size: 1rem; transition: border-color 0.3s; background: #fff; color: #333; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #c41e3a; }
+        .form-group input.error, .form-group textarea.error { border-color: #ff4444; }
+        .error-message { color: #ff6b6b; font-size: 0.85rem; margin-top: 0.3rem; display: none; }
+        .error-message.show { display: block; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .notification { position: fixed; top: 90px; right: 20px; padding: 1rem 1.5rem; border-radius: 8px; color: white; font-weight: 500; box-shadow: 0 5px 20px rgba(0,0,0,0.2); z-index: 2000; transform: translateX(400px); transition: transform 0.4s ease; max-width: 350px; }
+        .notification.show { transform: translateX(0); }
+        .notification.success { background: #28a745; }
+        .notification.error { background: #dc3545; }
+        .alt-contacts { margin-top: 2rem; text-align: center; padding-top: 2rem; border-top: 1px solid #444; }
+        .alt-contacts p { margin-bottom: 1rem; color: #ccc; }
+        .alt-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-alt { padding: 0.8rem 1.5rem; border-radius: 5px; text-decoration: none; color: white; font-weight: 500; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-telegram { background: #0088cc; }
+        .btn-telegram:hover { background: #006699; transform: translateY(-2px); }
+        .btn-whatsapp { background: #25D366; }
+        .btn-whatsapp:hover { background: #1da851; transform: translateY(-2px); }
+        footer { background: #111; color: white; text-align: center; padding: 2rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; text-align: left; }
+        .footer-section h3 { color: #c41e3a; margin-bottom: 1rem; }
+        .footer-section p, .footer-section a { color: #ccc; text-decoration: none; line-height: 2; }
+        .footer-section a:hover { color: #c41e3a; }
+        .copyright { border-top: 1px solid #333; padding-top: 2rem; color: #999; }
+        @media (max-width: 768px) { .nav-links { display: none; } .hero-content h1 { font-size: 2rem; } .hero-content p { font-size: 1rem; } .section-title { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div id="notification" class="notification"></div>
+
+    <header>
+        <nav>
+            <div class="logo">Вся<span>Япония</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#categories">Каталог</a></li>
+                <li><a href="#why-us">О нас</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Оригинальные и неоригинальные запчасти на японские автомобили</h1>
+            <p>Гарантия качества. Огромный выбор в наличии и под заказ.</p>
+            <a href="#contact" class="btn">Получить консультацию</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title">Почему выбирают нас</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✓</div>
+                <h3>Оригинал и качественные аналоги</h3>
+                <p>Широкий выбор: оригинальные запчасти и проверенные аналоги от лучших производителей</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Быстрый заказ</h3>
+                <p>Быстрый заказ запчастей, которых нет на складе. Найдем и привезем в кратчайшие сроки</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Лучшие цены</h3>
+                <p>Работаем без посредников. Гарантия лучшей цены на рынке</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Гарантия</h3>
+                <p>Официальная гарантия на все запчасти. Возврат в течение 30 дней</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories" id="categories">
+        <h2 class="section-title">Категории запчастей</h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <h3>Двигатель и трансмиссия</h3>
+                <ul>
+                    <li>Двигатели и комплектующие</li>
+                    <li>Коробки передач</li>
+                    <li>Система охлаждения</li>
+                    <li>Турбины и компрессоры</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h3>Подвеска и рулевое</h3>
+                <ul>
+                    <li>Амортизаторы и стойки</li>
+                    <li>Рычаги и сайлентблоки</li>
+                    <li>Рулевые рейки</li>
+                    <li>Ступицы и подшипники</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h3>Тормозная система</h3>
+                <ul>
+                    <li>Тормозные диски и колодки</li>
+                    <li>Тормозные суппорты</li>
+                    <li>Тормозные шланги</li>
+                    <li>ABS и ESP компоненты</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h3>Электрика и электроника</h3>
+                <ul>
+                    <li>Стартеры и генераторы</li>
+                    <li>Датчики и сенсоры</li>
+                    <li>Блоки управления</li>
+                    <li>Оптика и освещение</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h3>Кузовные запчасти</h3>
+                <ul>
+                    <li>Бамперы и крылья</li>
+                    <li>Капоты и двери</li>
+                    <li>Зеркала и стекла</li>
+                    <li>Фары и фонари</li>
+                </ul>
+            </div>
+            <div class="category-card">
+                <h3>Расходные материалы</h3>
+                <ul>
+                    <li>Масла и жидкости</li>
+                    <li>Фильтры всех типов</li>
+                    <li>Свечи зажигания</li>
+                    <li>Ремни и цепи ГРМ</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-us" id="why-us">
+        <h2 class="section-title">Наши преимущества</h2>
+        <div class="why-grid">
+            <div class="why-item">
+                <div class="why-number">01</div>
+                <div>
+                    <h3>Более 20 лет на рынке</h3>
+                    <p>Работаем с японскими автозапчастями более 20 лет. За это время мы заслужили доверие тысяч клиентов по всей России</p>
+                </div>
+            </div>
+            <div class="why-item">
+                <div class="why-number">02</div>
+                <div>
+                    <h3>Профессиональный подбор</h3>
+                    <p>Наши специалисты помогут подобрать нужную запчасть по VIN-коду автомобиля с точностью 100%</p>
+                </div>
+            </div>
+            <div class="why-item">
+                <div class="why-number">03</div>
+                <div>
+                    <h3>Собственный склад</h3>
+                    <p>Более 50,000 наименований в наличии на складе в Мытищах. Отгрузка в день заказа</p>
+                </div>
+            </div>
+            <div class="why-item">
+                <div class="why-number">04</div>
+                <div>
+                    <h3>Техническая поддержка</h3>
+                    <p>Бесплатные консультации по установке и эксплуатации. Помощь в решении технических вопросов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Свяжитесь с нами</h2>
+            
+            <!-- ФОРМА С ОТПРАВКОЙ ЧЕРЕZ FORMSPREE.IO -->
+            <form id="contactForm" action="https://formspree.io/f/mlgyywvz" method="POST">
+                
+                <div class="form-group">
+                    <label for="name">Ваше имя *</label>
+                    <input type="text" id="name" name="Имя" required placeholder="Иван Иванов">
+                    <div class="error-message" id="nameError">Пожалуйста, введите ваше имя</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Телефон *</label>
+                    <input type="tel" id="phone" name="Телефон" required placeholder="+7 (___) ___-__-__" maxlength="18">
+                    <div class="error-message" id="phoneError">Введите корректный номер телефона</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="car">Марка и модель автомобиля</label>
+                    <input type="text" id="car" name="Автомобиль" placeholder="Например: Toyota Camry 2015">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Сообщение *</label>
+                    <textarea id="message" name="Сообщение" required placeholder="Опишите, какие запчасти вам нужны, или укажите VIN-код"></textarea>
+                    <div class="error-message" id="messageError">Пожалуйста, опишите ваш запрос</div>
+                </div>
+                
+                <button type="submit" class="btn" id="submitBtn">Отправить заявку</button>
+            </form>
+
+            <div class="alt-contacts">
+                <p>Или напишите нам напрямую:</p>
+                <div class="alt-buttons">
+                    <a href="https://t.me/+79015105932" target="_blank" class="btn-alt btn-telegram">
+                        ✈️ Telegram
+                    </a>
+                    <a href="https://max.ru/+79015105932" target="_blank" class="btn-alt btn-max">
+                        💬 Макс
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Вся Япония</h3>
+                <p>Оригинальные и неоригинальные запчасти на японские автомобили</p>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>📞 <a href="tel:+79015105932">+7 901 510 59 32</a></p>
+                <p>✉️ <a href="mailto:japautozap@mail.ru">japautozap@mail.ru</a></p>
+                <p>📍 г. Мытищи, Ярославское ш. 114</p>
+            </div>
+            <div class="footer-section">
+                <h3>Режим работы</h3>
+                <p>Пн-Сб: 9:00 - 19:00</p>
+                <p>Вс: 9:00 - 18:00</p>
+                <p>Без выходных</p>
+            </div>
+            <div class="footer-section">
+                <h3>Связь с нами</h3>
+                <p><a href="https://t.me/+79015105932">Telegram</a></p>
+                <p><a href="tel:+79015105932">Макс</a></p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Вся Япония. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== МАСКА ТЕЛЕФОНА =====
+        const phoneInput = document.getElementById('phone');
+        
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('7') || value.startsWith('8')) {
+                value = value.substring(1);
+            }
+            let formatted = '+7';
+            if (value.length > 0) formatted += ' (' + value.substring(0, 3);
+            if (value.length >= 3) formatted += ') ' + value.substring(3, 6);
+            if (value.length >= 6) formatted += '-' + value.substring(6, 8);
+            if (value.length >= 8) formatted += '-' + value.substring(8, 10);
+            e.target.value = formatted;
+        });
+
+        phoneInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value === '+7') {
+                e.preventDefault();
+            }
+        });
+
+        // ===== УВЕДОМЛЕНИЯ =====
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const notification = document.getElementById('notification');
+
+        function showNotification(message, type = 'success') {
+            notification.textContent = message;
+            notification.className = 'notification ' + type + ' show';
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // ===== ВАЛИДАЦИЯ =====
+        function validateField(field, errorId) {
+            const errorEl = document.getElementById(errorId);
+            if (!field.value.trim()) {
+                field.classList.add('error');
+                errorEl.classList.add('show');
+                return false;
+            } else {
+                field.classList.remove('error');
+                errorEl.classList.remove('show');
+                return true;
+            }
+        }
+
+        function validatePhone() {
+            const digits = phoneInput.value.replace(/\D/g, '');
+            return digits.length === 11;
+        }
+
+        ['name', 'phone', 'message'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                this.classList.remove('error');
+                document.getElementById(id + 'Error').classList.remove('show');
+            });
+        });
+
+        // ===== ОТПРАВКА ЧЕРЕZ FORMSPREE (AJAX) =====
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name');
+            const message = document.getElementById('message');
+            
+            const isNameValid = validateField(name, 'nameError');
+            const isPhoneValid = validatePhone();
+            const isMessageValid = validateField(message, 'messageError');
+            
+            if (!isPhoneValid) {
+                phoneInput.classList.add('error');
+                document.getElementById('phoneError').classList.add('show');
+            }
+            
+            if (!isNameValid || !isPhoneValid || !isMessageValid) {
+                showNotification('Пожалуйста, заполните все обязательные поля', 'error');
+                return;
+            }
+            
+            // Проверка что endpoint настроен
+            if (form.action.includes('YOUR_FORM_ID')) {
+                showNotification('⚠️ Форма не настроена. Укажите Formspree endpoint в коде.', 'error');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+            
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    showNotification('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.', 'success');
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    if (data.errors) {
+                        showNotification('❌ Ошибка: ' + data.errors.map(e => e.message).join(', '), 'error');
+                    } else {
+                        throw new Error('Ошибка сервера');
+                    }
+                }
+            } catch (error) {
+                showNotification('❌ Ошибка отправки. Напишите нам в Telegram напрямую.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить заявку';
+            }
+        });
+
+        // ===== ПЛАВНАЯ ПРОКРУТКА =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
